@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Nice Scissors - Book Appointment</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="container-fluid bg-dark text-white text-center p-4">
+    <h1>✂ Nice Scissors</h1>
+    <p>Professional Hair Services</p>
+    <p>
+        <i class="bi bi-geo-alt-fill"></i> 123 Main Street |
+        <i class="bi bi-clock-fill"></i> Mon-Sat 9AM-6PM |
+        <i class="bi bi-telephone-fill"></i> (123) 456-7890
+    </p>
+</div>
+
+<div class="container my-4">
+
+    <!-- SERVICES -->
+    <h2 class="mb-3"><i class="bi bi-scissors"></i> 1. Choose Your Service</h2>
+
+    <div class="card-deck">
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Short Haircut - $25</h5>
+                <p class="card-text">Clean and professional short style.</p>
+                <button class="btn btn-primary btn-block"
+                        data-toggle="collapse"
+                        data-target="#step2">
+                    <i class="bi bi-check-circle"></i> Select
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Medium Haircut - $35</h5>
+                <p class="card-text">Layered and styled medium cut.</p>
+                <button class="btn btn-primary btn-block"
+                        data-toggle="collapse"
+                        data-target="#step2">
+                    <i class="bi bi-check-circle"></i> Select
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Hair Coloring - $60</h5>
+                <p class="card-text">Full professional coloring service.</p>
+                <button class="btn btn-primary btn-block"
+                        data-toggle="collapse"
+                        data-target="#step2">
+                    <i class="bi bi-check-circle"></i> Select
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- DATE -->
+    <div id="step2" class="collapse mt-5">
+        <h2><i class="bi bi-calendar-event"></i> 2. Choose Date & Time</h2>
+
+        <div class="form-group">
+            <label for="dateTime">
+                <i class="bi bi-clock"></i> Select Date and Time
+            </label>
+            <input type="datetime-local" class="form-control" id="dateTime">
+        </div>
+
+        <button class="btn btn-success btn-lg btn-block"
+                data-toggle="collapse"
+                data-target="#step3">
+            <i class="bi bi-arrow-right-circle"></i> Next Step
+        </button>
+    </div>
+
+    <!-- INFO -->
+    <div id="step3" class="collapse mt-5">
+        <h2><i class="bi bi-person-lines-fill"></i> 3. Your Information</h2>
+
+        <form>
+            <div class="form-group">
+                <label><i class="bi bi-person"></i> Name</label>
+                <input type="text" class="form-control" placeholder="Enter your name">
+            </div>
+
+            <div class="form-group">
+                <label><i class="bi bi-envelope"></i> Email</label>
+                <input type="email" class="form-control" placeholder="Enter your email">
+            </div>
+
+            <div class="form-group">
+                <label><i class="bi bi-telephone"></i> Phone</label>
+                <input type="tel" class="form-control" placeholder="Enter your phone number">
+            </div>
+
+            <div class="alert alert-info">
+                <strong>You chose:</strong> Service selected + Date selected
+            </div>
+
+            <button type="button"
+                    class="btn btn-danger btn-lg btn-block"
+                    data-toggle="collapse"
+                    data-target="#confirmation">
+                <i class="bi bi-check2-square"></i> Confirm Booking
+            </button>
+        </form>
+    </div>
+
+    <!-- CONFIRMATION -->
+    <div id="confirmation" class="collapse mt-5">
+        <div class="alert alert-success text-center">
+            <h4><i class="bi bi-check-circle-fill"></i> Appointment Confirmed!</h4>
+            <p>Thank you for booking with Nice Scissors.</p>
+        </div>
+    </div>
+
+</div>
+
+</body>
