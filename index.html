@@ -1,141 +1,309 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Nice Scissors - Book Appointment</title>
+    <title>Nice Scissors - Lab 5</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
+    <style>
+        /* fixed navbar */
+        body {
+            padding-top: 70px; 
+            background-color: #f4f4f4;
+        }
 
-    <!-- Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        /* changes color and makes it bigger */
+        .form-control:hover {
+            background-color: #e9ecef;
+            border: 2px solid gray;
+        }
 
-    <!-- Custom CSS -->
-    <link href="styles/style.css" rel="stylesheet" type="text/css">
+        .form-control:focus {
+            background-color: #d4edda; /* Light green */
+            transform: scale(1.03); /* make it bigger */
+            border: 2px solid green;
+        }
+
+        /* show which card is clicked */
+        .selected {
+            border: 4px solid #007bff !important;
+            background-color: #e6f2ff;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        /* Fix image sizes */
+        .expert-img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* Error  */
+        .invalid-feedback {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<div class="container-fluid bg-dark text-white text-center p-4">
-    <h1>✂ Nice Scissors</h1>
-    <p>Professional Hair Services</p>
-    <p>
-        <i class="bi bi-geo-alt-fill"></i> 123 Main Street |
-        <i class="bi bi-clock-fill"></i> Mon-Sat 9AM-6PM |
-        <i class="bi bi-telephone-fill"></i> (123) 456-7890
-    </p>
+<!-- nav -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#"><i class="bi bi-scissors"></i> Nice Scissors</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="#services"><i class="bi bi-list"></i> Services</a></li>
+            <li class="nav-item"><a class="nav-link" href="#experts"><i class="bi bi-person-badge"></i> Experts</a></li>
+            <li class="nav-item"><a class="nav-link" href="#booking"><i class="bi bi-calendar"></i> Booking</a></li>
+            <li class="nav-item"><a class="nav-link" href="#payment"><i class="bi bi-credit-card"></i> Payment</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container text-center mt-3">
+    <h1>✂ Nice Scissors Hair & Bike Repair</h1>
+    <p>123 Main Street | (123) 456-7890</p>
 </div>
 
-<div class="container my-4">
+<div class="container">
 
     <!-- SERVICES -->
-    <h2 class="mb-3"><i class="bi bi-scissors"></i> 1. Choose Your Service</h2>
-
-    <div class="card-deck">
-
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Short Haircut - $25</h5>
-                <p class="card-text">Clean and professional short style.</p>
-                <button class="btn btn-primary btn-block"
-                        data-toggle="collapse"
-                        data-target="#step2">
-                    <i class="bi bi-check-circle"></i> Select
-                </button>
+    <div id="services">
+        <h3><i class="bi bi-list"></i> 1. Services</h3>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card service-card" id="srv1" onclick="pickService('Short Haircut', 25, 'srv1')">
+                    <div class="card-body">
+                        <h5>Short Haircut</h5>
+                        <p>$25.00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card service-card" id="srv2" onclick="pickService('Medium Haircut', 35, 'srv2')">
+                    <div class="card-body">
+                        <h5>Medium Haircut</h5>
+                        <p>$35.00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card service-card" id="srv3" onclick="pickService('Bike Repair', 60, 'srv3')">
+                    <div class="card-body">
+                        <h5>Bike Repair</h5>
+                        <p>$60.00</p>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Medium Haircut - $35</h5>
-                <p class="card-text">Layered and styled medium cut.</p>
-                <button class="btn btn-primary btn-block"
-                        data-toggle="collapse"
-                        data-target="#step2">
-                    <i class="bi bi-check-circle"></i> Select
-                </button>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Hair Coloring - $60</h5>
-                <p class="card-text">Full professional coloring service.</p>
-                <button class="btn btn-primary btn-block"
-                        data-toggle="collapse"
-                        data-target="#step2">
-                    <i class="bi bi-check-circle"></i> Select
-                </button>
-            </div>
-        </div>
-
     </div>
 
-    <!-- DATE -->
-    <div id="step2" class="collapse mt-5">
-        <h2><i class="bi bi-calendar-event"></i> 2. Choose Date & Time</h2>
-
-        <div class="form-group">
-            <label for="dateTime">
-                <i class="bi bi-clock"></i> Select Date and Time
-            </label>
-            <input type="datetime-local" class="form-control" id="dateTime">
+    <!-- EXPERTS -->
+    <div id="experts" class="mt-4">
+        <h3><i class="bi bi-person-badge"></i> 2. Choose Professional</h3>
+        <p><i>Note: Choosing an expert updates the calendar below!</i></p>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card expert-card" id="exp1" onclick="pickExpert('Jule', 2, 'exp1')"> <!-- 2 = Tuesday -->
+                    <img src="images/Jule.jpg" class="card-img-top expert-img" alt="Jule" onerror="this.src='https://via.placeholder.com/300x200?text=Jule'">
+                    <div class="card-body">
+                        <h5>Jule (Hair)</h5>
+                        <p>Not here on Tuesdays.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card expert-card" id="exp2" onclick="pickExpert('Erwind', 3, 'exp2')"> <!-- 3 = Wednesday -->
+                    <img src="images/Erwind.jpg" class="card-img-top expert-img" alt="Erwind" onerror="this.src='https://via.placeholder.com/300x200?text=Erwind'">
+                    <div class="card-body">
+                        <h5>Erwind (Bikes)</h5>
+                        <p>Not here on Wednesdays.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <button class="btn btn-success btn-lg btn-block"
-                data-toggle="collapse"
-                data-target="#step3">
-            <i class="bi bi-arrow-right-circle"></i> Next Step
-        </button>
     </div>
 
-    <!-- INFO -->
-    <div id="step3" class="collapse mt-5">
-        <h2><i class="bi bi-person-lines-fill"></i> 3. Your Information</h2>
+    <hr>
 
-        <form>
+    <form id="mainForm">
+        
+        <!-- BOOKING -->
+        <div id="booking">
+            <h3><i class="bi bi-calendar"></i> 3. Date & Time</h3>
             <div class="form-group">
-                <label><i class="bi bi-person"></i> Name</label>
-                <input type="text" class="form-control" placeholder="Enter your name">
+                <label>Date:</label>
+                <!-- Tooltip -->
+                <input type="text" id="datePicker" class="form-control" required readonly placeholder="Click here..."
+                       data-toggle="tooltip" title="Weekends and expert off-days are disabled!">
+            </div>
+            <div class="form-group">
+                <label>Time:</label>
+                <select id="timeSelect" class="form-control" required data-toggle="tooltip" title="Pick a time">
+                    <option value="">Select...</option>
+                    <option value="9am">9:00 AM</option>
+                    <option value="12pm">12:00 PM</option>
+                    <option value="3pm">3:00 PM</option>
+                </select>
+            </div>
+        </div>
+
+        <br>
+
+        <!-- PAYMENT -->
+        <div id="payment" class="bg-light p-3 border">
+            <h3><i class="bi bi-credit-card"></i> 4. Payment & Info</h3>
+            <p><strong>Total: $<span id="priceDisplay">0</span></strong></p>
+
+            <div class="form-group">
+                <label><i class="bi bi-person"></i> Name:</label>
+                <!-- Feedback (Error msg if numbers are used) -->
+                <input type="text" id="clientName" class="form-control" data-toggle="tooltip" title="Letters only please">
+                <div class="invalid-feedback">Error: Name cannot contain numbers!</div>
             </div>
 
             <div class="form-group">
-                <label><i class="bi bi-envelope"></i> Email</label>
-                <input type="email" class="form-control" placeholder="Enter your email">
+                <label><i class="bi bi-telephone"></i> Phone:</label>
+                <!-- Tooltip & Regex Constraint -->
+                <input type="text" id="clientPhone" class="form-control" data-toggle="tooltip" title="Enter 10 digit number">
+                <div class="invalid-feedback">Error: Must be exactly 10 digits.</div>
             </div>
 
             <div class="form-group">
-                <label><i class="bi bi-telephone"></i> Phone</label>
-                <input type="tel" class="form-control" placeholder="Enter your phone number">
+                <label><i class="bi bi-credit-card-2-front"></i> Credit Card:</label>
+                <!-- Tooltip & Regex Constraint -->
+                <input type="text" id="ccNum" class="form-control" data-toggle="tooltip" title="16 digit card number">
+                <div class="invalid-feedback">Error: Credit card must be 16 digits exactly.</div>
             </div>
 
-            <div class="alert alert-info">
-                <strong>You chose:</strong> Service selected + Date selected
-            </div>
-
-            <button type="button"
-                    class="btn btn-danger btn-lg btn-block"
-                    data-toggle="collapse"
-                    data-target="#confirmation">
-                <i class="bi bi-check2-square"></i> Confirm Booking
+            <button type="button" class="btn btn-primary btn-lg btn-block mt-3" onclick="submitForm()">
+                Submit Booking
             </button>
-        </form>
-    </div>
-
-    <!-- CONFIRMATION -->
-    <div id="confirmation" class="collapse mt-5">
-        <div class="alert alert-success text-center">
-            <h4><i class="bi bi-check-circle-fill"></i> Appointment Confirmed!</h4>
-            <p>Thank you for booking with Nice Scissors.</p>
         </div>
-    </div>
+    </form>
 
+    <br><footer class="text-center text-muted mb-4 mt-2">
+        <p><i>Designed by Rolf, Ming, Dragos</i></p>
+    </footer>
 </div>
 
+<!-- Scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<script>
+    // vars for state
+    var myService = "";
+    var myExpert = "";
+    var expertOffDay = -1; // default no off day
+
+    $(document).ready(function(){
+        // tooltips
+        $('[data-toggle="tooltip"]').tooltip();
+
+        // Calendar constraints (grey out weekends and off days)
+        $("#datePicker").datepicker({
+            dateFormat: "yy-mm-dd",
+            beforeShowDay: function(date) {
+                var day = date.getDay();
+                
+                // 0 is Sunday, 6 is Saturday
+                if (day == 0 || day == 6) {
+                    return [false, "", "Closed on weekends"];
+                }
+                
+                // hide experts off day
+                if (day == expertOffDay) {
+                    return [false, "", "Expert is off today"];
+                }
+                
+                return [true, ""];
+            }
+        });
+    });
+
+    // functions for clicking cards
+    function pickService(name, price, id) {
+        myService = name;
+        $('.service-card').removeClass('selected');
+        $('#' + id).addClass('selected');
+        $('#priceDisplay').text(price);
+    }
+
+    function pickExpert(name, offDay, id) {
+        myExpert = name;
+        expertOffDay = offDay; 
+        
+        $('.expert-card').removeClass('selected');
+        $('#' + id).addClass('selected');
+
+        // Reset the calendar 
+        $("#datePicker").val('');
+        $("#datePicker").datepicker("refresh");
+    }
+
+    // Validation 
+    function submitForm() {
+        var isValid = true;
+
+        // Reset all error messages
+        $('.form-control').removeClass('is-invalid');
+
+        // Check if service and expert picked
+        if(myService == "" || myExpert == "") {
+            alert("Please pick a service and an expert first!");
+            return;
+        }
+
+        // Validate Date & Time
+        if($("#datePicker").val() == "") { $("#datePicker").addClass("is-invalid"); isValid = false; }
+        if($("#timeSelect").val() == "") { $("#timeSelect").addClass("is-invalid"); isValid = false; }
+
+        // No numbers in name
+        var nameVal = $("#clientName").val();
+        var nameRegex = /^[A-Za-z\s]+$/; 
+        if(!nameRegex.test(nameVal) || nameVal == "") {
+            $("#clientName").addClass("is-invalid");
+            isValid = false;
+        }
+
+        // Regex for Phone 10 digits
+        var phoneVal = $("#clientPhone").val();
+        var phoneRegex = /^\d{10}$/;
+        if(!phoneRegex.test(phoneVal)) {
+            $("#clientPhone").addClass("is-invalid");
+            isValid = false;
+        }
+
+        // Regex for CC 16 digits
+        var ccVal = $("#ccNum").val();
+        var ccRegex = /^\d{16}$/;
+        if(!ccRegex.test(ccVal)) {
+            $("#ccNum").addClass("is-invalid");
+            isValid = false;
+        }
+
+        // If everything is good, show success alert
+        if(isValid) {
+            alert("Success! " + nameVal + " is booked with " + myExpert + " for " + myService + " on " + $("#datePicker").val() + ".");
+            // just reload page to clear it
+            location.reload(); 
+        }
+    }
+</script>
+
 </body>
+</html>
